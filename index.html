@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Note Manager</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#16a34a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Note Manager">
+  <meta name="description" content="Aplikasi manajemen catatan dan tabel excel by PP Daruttauhid Al Alawi">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk5vdGUgTWFuYWdlciIsCiAgInNob3J0X25hbWUiOiAiTm90ZSBNYW5hZ2VyIiwKICAiZGVzY3JpcHRpb24iOiAiQXBsaWthc2kgbWFuYWplbWVuIGNhdGF0YW4gZGFuIHRhYmVsIGV4Y2VsIGJ5IFBQIERhcnV0dGF1aGlkIEFsIEFsYXdpIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjMTZhMzRhIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLAogICJzY29wZSI6ICIvIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3JlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIHJ4PScyMCcgZmlsbD0nJTIzMTZhMzRhJy8lM0UlM0NwYXRoIGQ9J00yNSAzMGg1MHY4SDI1ek0yNSA0Nmg1MHY4SDI1ek0yNSA2MmgzNXY4SDI1JyBmaWxsPSd3aGl0ZScvJTNFJTNDY2lyY2xlIGN4PSc3MCcgY3k9JzcwJyByPScxNScgZmlsbD0nJTIzZmZmJy8lM0UlM0NwYXRoIGQ9J003MCA2MnYxNk02MiA3MGgxNicgc3Ryb2tlPSclMjMxNmEzNGEnIHN0cm9rZS13aWR0aD0nMycgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8lM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDsvgneG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTAwIDEwMCclM0UlM0NyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJyByeD0nMjAnIGZpbGw9JyUyMzE2YTM0YSclM0UlM0NwYXRoIGQ9J00yNSAzMGg1MHY4SDI1ek0yNSA0Nmg1MHY4SDI1ek0yNSA2MmgzNXY4SDI1JyBmaWxsPSd3aGl0ZSclM0UlM0NjaXJjbGUgY3g9JzcwJyBjeT0nNzAnIHI9JzE1JyBmaWxsPSclMjNmZmYnLyUzRSUzQ3BhdGggZD0nTTcwIDYydjE2TTYyIDcwaDE2JyBzdHJva2U9JyUyMzE2YTM0YScgc3Ryb2tlLXdpZHRoPSczJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLyUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXSwKICAiY2F0ZWdvcmllcyI6IFsicHJvZHVjdGl2aXR5Il0sCiAgInJlbGF0ZWRfYXBwbGljYXRpb25zIjogW10sCiAgInNob3J0Y3V0cyI6IFsKICAgIHsKICAgICAgIm5hbWUiOiAiQ2F0YXRhbiBCYXJ1IiwKICAgICAgInNob3J0X25hbWUiOiAiQ2F0YXRhbiIsCiAgICAgICJkZXNjcmlwdGlvbiI6ICJCdWF0IGNhdGF0YW4gYmFydSIsCiAgICAgICJ1cmwiOiAiLyIsCiAgICAgICJpY29ucyI6IFtdCiAgICB9CiAgXQp9">
+  
+  <!-- Favicon & Icons -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2316a34a'/%3E%3Cpath d='M25 30h50v8H25zM25 46h50v8H25zM25 62h35v8H25z' fill='white'/%3E%3Ccircle cx='70' cy='70' r='15' fill='%23fff'/%3E%3Cpath d='M70 62v16M62 70h16' stroke='%2316a34a' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2316a34a'/%3E%3Cpath d='M25 30h50v8H25zM25 46h50v8H25zM25 62h35v8H25z' fill='white'/%3E%3Ccircle cx='70' cy='70' r='15' fill='%23fff'/%3E%3Cpath d='M70 62v16M62 70h16' stroke='%2316a34a' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif']
+          },
+          colors: {
+            primary: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Toast Animations */
+    .toast-enter { animation: slideIn 0.3s ease-out; }
+    .toast-exit { animation: slideOut 0.3s ease-in forwards; }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    
+    /* Modal Animation */
+    .modal-enter { animation: modalIn 0.2s ease-out; }
+    @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    
+    /* Splash Screen Animations */
+    .splash-logo { animation: logoPulse 1.5s ease-in-out infinite; }
+    @keyframes logoPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .splash-fade-out { animation: splashFade 0.5s ease-out forwards; }
+    @keyframes splashFade {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+    .splash-text { animation: textFade 0.8s ease-out 0.3s both; }
+    @keyframes textFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .splash-credit { animation: creditFade 0.8s ease-out 0.6s both; }
+    @keyframes creditFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Checkbox Styling */
+    input[type="checkbox"] { accent-color: #16a34a; }
+    
+    /* Excel Cell */
+    .excel-cell { min-width: 100px; user-select: none; }
+    
+    /* Resize Handle */
+    .resize-handle { 
+      cursor: col-resize; 
+      width: 8px; 
+      background: transparent;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      z-index: 10;
+      touch-action: none;
+    }
+    .resize-handle:hover,
+    .resize-handle:active { 
+      background: rgba(22, 163, 74, 0.6); 
+    }
+    .resize-handle::after {
+      content: '';
+      position: absolute;
+      right: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 30px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 2px;
+    }
+    
+    /* Detail Item Grid */
+    .detail-item { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+    @media (max-width: 768px) {
+      .detail-item { grid-template-columns: 1fr; }
+    }
+    
+    /* Table Scroll */
+    .table-scroll { 
+      overflow-x: auto; 
+      scroll-behavior: smooth; 
+      -webkit-overflow-scrolling: touch;
+    }
+    .table-scroll::-webkit-scrollbar { height: 6px; }
+    .table-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
+    .table-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    .table-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .dark .table-scroll::-webkit-scrollbar-track { background: #1f2937; }
+    .dark .table-scroll::-webkit-scrollbar-thumb { background: #4b5563; }
+    
+    /* Number Input */
+    .number-input::-webkit-outer-spin-button,
+    .number-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .number-input {
+      -moz-appearance: textfield;
+      text-align: right;
+    }
+    
+    /* PWA Install Banner */
+    .pwa-banner { animation: slideUp 0.3s ease-out; }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    /* Back Button */
+    .back-btn {
+      transition: all 0.2s ease;
+    }
+    .back-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body class="h-full bg-gray-50 dark:bg-gray-900 font-sans transition-colors duration-200">
+  
+  <!-- Custom Splash Screen -->
+  <div id="splashScreen" class="fixed inset-0 z-[100] bg-white dark:bg-gray-900 flex flex-col items-center justify-center">
+    <!-- Logo -->
+    <div class="splash-logo mb-6">
+      <svg class="w-28 h-28" viewBox="0 0 100 100" fill="none">
+        <rect width="100" height="100" rx="20" fill="#16a34a"/>
+        <path d="M25 30h50v8H25zM25 46h50v8H25zM25 62h35v8H25z" fill="white"/>
+        <circle cx="70" cy="70" r="15" fill="white"/>
+        <path d="M70 62v16M62 70h16" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    
+    <!-- App Name -->
+    <h1 class="splash-text text-3xl font-bold text-gray-800 dark:text-white">Note Manager</h1>
+    
+    <!-- Credit -->
+    <p class="splash-credit text-sm text-gray-500 dark:text-gray-400 mt-4">By PP Daruttauhid Al Alawi</p>
+    
+    <!-- Loading Indicator -->
+    <div class="splash-credit mt-8 flex gap-1">
+      <div class="w-2 h-2 bg-primary-600 rounded-full animate-bounce" style="animation-delay: 0s;"></div>
+      <div class="w-2 h-2 bg-primary-600 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+      <div class="w-2 h-2 bg-primary-600 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+    </div>
+  </div>
+  
+  <div id="app" class="h-full flex flex-col overflow-hidden">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <!-- Back Button -->
+        <button id="backBtn" class="back-btn hidden p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700" onclick="goBack()">
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        
+        <svg class="w-8 h-8 text-primary-600" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="20" fill="currentColor"/>
+          <path d="M25 30h50v8H25zM25 46h50v8H25zM25 62h35v8H25z" fill="white"/>
+          <circle cx="70" cy="70" r="12" fill="white"/>
+          <path d="M70 64v12M64 70h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <h1 id="appTitle" class="text-xl font-bold text-gray-800 dark:text-white">Note Manager</h1>
+          <a href="https://instagram.com/ppdaruttauhidalalawi" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">by PP Daruttauhid Al Alawi</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-1">
+        <!-- Install Button -->
+        <button id="installBtn" class="hidden p-2 rounded-lg bg-primary-500 hover:bg-primary-600 text-white transition-colors" title="Install Aplikasi">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+        </button>
+        
+        <!-- Sort Dropdown -->
+        <div class="relative">
+          <button id="sortToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" title="Urutan">
+            <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+          </button>
+          <div id="sortDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-40">
+            <button onclick="setSort('name-asc')" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm">Nama A-Z</button>
+            <button onclick="setSort('name-desc')" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm">Nama Z-A</button>
+            <button onclick="setSort('date-asc')" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm">Terlama</button>
+            <button onclick="setSort('date-desc')" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm">Terbaru</button>
+          </div>
+        </div>
+
+        <!-- View Mode Toggle -->
+        <div class="flex gap-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+          <button id="viewIconBtn" class="p-1.5 rounded transition-colors bg-white dark:bg-gray-600" title="Tampilan Ikon" onclick="setViewMode('icon')">
+            <svg class="w-4 h-4 text-gray-600 dark:text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="8" height="8" fill="currentColor"/>
+              <rect x="13" y="3" width="8" height="8" fill="currentColor"/>
+              <rect x="3" y="13" width="8" height="8" fill="currentColor"/>
+              <rect x="13" y="13" width="8" height="8" fill="currentColor"/>
+            </svg>
+          </button>
+          <button id="viewDetailBtn" class="p-1.5 rounded transition-colors" title="Tampilan Detail" onclick="setViewMode('detail')">
+            <svg class="w-4 h-4 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+          <svg id="sunIcon" class="w-5 h-5 text-gray-600 dark:text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <svg id="moonIcon" class="w-5 h-5 text-gray-600 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div id="breadcrumb" class="bg-white dark:bg-gray-800 px-4 py-2 border-b border-gray-200 dark:border-gray-700 flex items-center gap-2 text-sm shrink-0 overflow-x-auto">
+      <button onclick="navigateTo('root')" class="text-primary-600 dark:text-primary-400 hover:underline font-medium whitespace-nowrap">Root</button>
+    </div>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="flex-1 overflow-auto p-4">
+      <div id="fileList" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        <!-- Files will be rendered here -->
+      </div>
+      <div id="emptyState" class="hidden flex-col items-center justify-center h-64 text-gray-400 dark:text-gray-500">
+        <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+        </svg>
+        <p class="text-lg">Folder kosong</p>
+        <p class="text-sm">Klik + untuk menambah item baru</p>
+      </div>
+    </main>
+
+    <!-- FAB Button -->
+    <button id="fabButton" onclick="showAddModal()" class="fixed bottom-6 right-6 w-14 h-14 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 z-40 active:scale-95">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+    </button>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Add Modal -->
+    <div id="addModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Tambah Baru</h3>
+        </div>
+        <div class="p-2">
+          <button onclick="showCreateFolder()" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+              </svg>
+            </div>
+            <span class="text-gray-700 dark:text-gray-200 font-medium">Folder Baru</span>
+          </button>
+          <button onclick="showCreateNote()" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <span class="text-gray-700 dark:text-gray-200 font-medium">Catatan Teks</span>
+          </button>
+          <button onclick="showCreateTable()" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <span class="text-gray-700 dark:text-gray-200 font-medium">Tabel Excel</span>
+          </button>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+          <button onclick="hideAddModal()" class="w-full py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Folder Modal -->
+    <div id="createFolderModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Buat Folder Baru</h3>
+        </div>
+        <div class="p-4">
+          <input type="text" id="folderNameInput" placeholder="Nama folder" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideCreateFolder()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="createFolder()" class="flex-1 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors">Buat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Note Modal -->
+    <div id="createNoteModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Buat Catatan Baru</h3>
+        </div>
+        <div class="p-4">
+          <input type="text" id="noteNameInput" placeholder="Nama catatan" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideCreateNote()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="createNote()" class="flex-1 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors">Buat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Table Modal -->
+    <div id="createTableModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4 overflow-y-auto">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-lg modal-enter my-4">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Buat Tabel Baru</h3>
+        </div>
+        <div class="p-4 space-y-4">
+          <input type="text" id="tableNameInput" placeholder="Nama tabel" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+          
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Kolom Header</label>
+              <button onclick="addHeaderColumn()" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">+ Tambah Kolom</button>
+            </div>
+            <div id="headerColumns" class="space-y-2">
+              <!-- Header columns will be added here -->
+            </div>
+          </div>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideCreateTable()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="createTable()" class="flex-1 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors">Buat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Note Editor Modal -->
+    <div id="noteEditorModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-2xl h-[80%] flex flex-col modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between shrink-0">
+          <input type="text" id="noteEditorTitle" class="text-lg font-semibold text-gray-800 dark:text-white bg-transparent border-0 focus:ring-0 w-full" placeholder="Judul catatan">
+          <div class="flex gap-2 shrink-0 ml-2">
+            <button onclick="downloadNote()" class="p-2 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400" title="Download TXT">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+            </button>
+            <button onclick="closeNoteEditor()" class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex-1 p-4 overflow-hidden">
+          <textarea id="noteEditorContent" class="w-full h-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none" placeholder="Tulis catatan Anda di sini..."></textarea>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-2 shrink-0">
+          <button onclick="closeNoteEditor()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Tutup</button>
+          <button onclick="saveNote()" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors">Simpan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Editor Modal -->
+    <div id="tableEditorModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-2 md:p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-6xl h-[95%] flex flex-col modal-enter">
+        <div class="p-3 md:p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between shrink-0 flex-wrap gap-2">
+          <input type="text" id="tableEditorTitle" class="text-lg font-semibold text-gray-800 dark:text-white bg-transparent border-0 focus:ring-0 flex-1 min-w-[150px]" placeholder="Judul tabel">
+          <div class="flex gap-1 md:gap-2 shrink-0">
+            <button onclick="zoomTable(-1)" class="p-2 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400" title="Zoom Out">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+              </svg>
+            </button>
+            <span id="zoomLevel" class="text-xs text-gray-500 dark:text-gray-400 px-2 py-2">100%</span>
+            <button onclick="zoomTable(1)" class="p-2 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400" title="Zoom In">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+              </svg>
+            </button>
+            <button onclick="addTableColumn()" class="p-2 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400" title="Tambah Kolom">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
+              </svg>
+            </button>
+            <button onclick="downloadTableTxt()" class="p-2 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400" title="Download TXT">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </button>
+            <button onclick="downloadTableExcel()" class="p-2 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400" title="Download Excel">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+            </button>
+            <button onclick="closeTableEditor()" class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Table Summary -->
+        <div id="tableSummary" class="px-3 md:px-4 py-2 bg-primary-50 dark:bg-primary-900/20 border-b border-gray-200 dark:border-gray-700 text-sm shrink-0">
+          <span class="text-gray-600 dark:text-gray-400">Total Angka: </span>
+          <span id="totalSum" class="font-bold text-primary-600 dark:text-primary-400">0</span>
+        </div>
+        
+        <div class="flex-1 overflow-hidden flex flex-col p-2 md:p-4">
+          <div id="tableContainer" class="table-scroll overflow-x-auto flex-1">
+            <!-- Table will be rendered here -->
+          </div>
+        </div>
+        <div class="p-3 md:p-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center shrink-0 flex-wrap gap-2">
+          <button onclick="addTableRow()" class="px-4 py-2 border border-primary-500 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-xl font-medium transition-colors">+ Tambah Baris</button>
+          <div class="flex gap-2">
+            <button onclick="closeTableEditor()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Tutup</button>
+            <button onclick="saveTable()" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors">Simpan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Column Modal -->
+    <div id="addColumnModal" class="fixed inset-0 bg-black/50 z-[60] hidden items-center justify-center p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Tambah Kolom Baru</h3>
+        </div>
+        <div class="p-4 space-y-3">
+          <input type="text" id="newColumnName" placeholder="Nama kolom" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+          <select id="newColumnType" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+            <option value="text">Teks</option>
+            <option value="number">Angka</option>
+            <option value="date">Tanggal</option>
+            <option value="checkbox">Checkbox</option>
+          </select>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideAddColumnModal()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="confirmAddColumn()" class="flex-1 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors">Tambah</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-red-600 dark:text-red-400">Konfirmasi Hapus</h3>
+        </div>
+        <div class="p-4 space-y-3">
+          <p id="deleteMessage" class="text-gray-700 dark:text-gray-300"></p>
+          <div id="deleteConfirmInput" class="hidden">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Ketik <strong>yes</strong> untuk konfirmasi:</p>
+            <input type="text" id="deleteConfirmText" placeholder="yes" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-red-500 focus:border-transparent">
+          </div>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideDeleteModal()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button id="deleteConfirmBtn" onclick="confirmDelete()" class="flex-1 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition-colors">Hapus</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =====================
+    // PWA Configuration
+    // =====================
+    let deferredPrompt = null;
+    
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', async () => {
+        try {
+          const swCode = `
+            const CACHE_NAME = 'note-manager-v2';
+            const urlsToCache = ['/'];
+            
+            self.addEventListener('install', event => {
+              event.waitUntil(
+                caches.open(CACHE_NAME)
+                  .then(cache => cache.addAll(urlsToCache))
+                  .then(() => self.skipWaiting())
+              );
+            });
+            
+            self.addEventListener('activate', event => {
+              event.waitUntil(
+                caches.keys().then(cacheNames => {
+                  return Promise.all(
+                    cacheNames.map(cacheName => {
+                      if (cacheName !== CACHE_NAME) {
+                        return caches.delete(cacheName);
+                      }
+                    })
+                  );
+                }).then(() => self.clients.claim())
+              );
+            });
+            
+            self.addEventListener('fetch', event => {
+              event.respondWith(
+                caches.match(event.request)
+                  .then(response => response || fetch(event.request))
+                  .catch(() => caches.match('/'))
+              );
+            });
+          `;
+          
+          const blob = new Blob([swCode], { type: 'application/javascript' });
+          const swUrl = URL.createObjectURL(blob);
+          await navigator.serviceWorker.register(swUrl, { scope: '/' });
+          console.log('Service Worker registered');
+        } catch (err) {
+          console.log('Service Worker registration failed:', err);
+        }
+      });
+    }
+    
+    // PWA Install Prompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Show install button in header
+      const installBtn = document.getElementById('installBtn');
+      if (installBtn) {
+        installBtn.classList.remove('hidden');
+      }
+    });
+    
+    window.addEventListener('appinstalled', () => {
+      deferredPrompt = null;
+      const installBtn = document.getElementById('installBtn');
+      if (installBtn) {
+        installBtn.classList.add('hidden');
+      }
+      showToast('Aplikasi berhasil diinstall!');
+    });
+    
+    // Install button click handler
+    document.getElementById('installBtn').addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          showToast('Menginstall aplikasi...');
+        }
+        deferredPrompt = null;
+        document.getElementById('installBtn').classList.add('hidden');
+      }
+    });
+
+    // =====================
+    // Number Formatting Functions
+    // =====================
+    function formatNumber(num) {
+      if (num === null || num === undefined || num === '') return '';
+      const number = parseFloat(num);
+      if (isNaN(number)) return '';
+      return number.toLocaleString('id-ID');
+    }
+    
+    function parseFormattedNumber(str) {
+      if (!str) return '';
+      const cleaned = String(str).replace(/\./g, '').replace(/,/g, '.');
+      const num = parseFloat(cleaned);
+      return isNaN(num) ? '' : num;
+    }
+
+    // =====================
+    // State & Config
+    // =====================
+    let data = { folders: {}, files: {} };
+    let currentPath = 'root';
+    let currentEditingId = null;
+    let currentEditingType = null;
+    let deleteTarget = null;
+    let tempHeaders = [];
+    let sortOrder = 'name-asc';
+    let viewMode = localStorage.getItem('viewMode') || 'icon';
+    let tableZoom = 100;
+    let resizingColumn = null;
+    let resizeStartX = 0;
+    let resizeStartWidth = 0;
+    let isResizing = false;
+    let navigationHistory = ['root']; // Track navigation history for back button
+
+    const defaultConfig = {
+      app_title: 'Note Manager'
+    };
+
+    // =====================
+    // Initialize
+    // =====================
+    function init() {
+      // Hide splash screen after loading
+      setTimeout(() => {
+        const splash = document.getElementById('splashScreen');
+        if (splash) {
+          splash.classList.add('splash-fade-out');
+          setTimeout(() => {
+            splash.style.display = 'none';
+          }, 500);
+        }
+      }, 1500);
+
+      loadData();
+      renderFileList();
+      setupEventListeners();
+      updateViewModeButtons();
+      updateBackButton();
+      
+      // Dark mode
+      const savedDarkMode = localStorage.getItem('darkMode');
+      if (savedDarkMode === 'true') {
+        document.documentElement.classList.add('dark');
+      }
+
+      // Element SDK
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            document.getElementById('appTitle').textContent = config.app_title || defaultConfig.app_title;
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ['app_title', config.app_title || defaultConfig.app_title]
+          ])
+        });
+      }
+    }
+
+    function setupEventListeners() {
+      // Sort dropdown
+      document.getElementById('sortToggle').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = document.getElementById('sortDropdown');
+        dropdown.classList.toggle('hidden');
+      });
+
+      // Close dropdown on outside click
+      document.addEventListener('click', (e) => {
+        const sortToggle = document.getElementById('sortToggle');
+        const dropdown = document.getElementById('sortDropdown');
+        if (!sortToggle.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.classList.add('hidden');
+        }
+      });
+
+      // Dark mode toggle
+      document.getElementById('darkModeToggle').addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+      });
+
+      // History API for back button
+      window.addEventListener('popstate', (e) => {
+        if (e.state && e.state.path) {
+          // User pressed back, navigate to previous folder
+          currentPath = e.state.path;
+          navigationHistory.pop();
+          renderBreadcrumb();
+          renderFileList();
+          updateBackButton();
+        } else {
+          // No more history, let browser handle (exit app)
+          // Push current state back to prevent exit
+          if (currentPath !== 'root') {
+            history.pushState({ path: currentPath }, '', '');
+          }
+        }
+      });
+
+      // Mouse events for resize
+      document.addEventListener('mouseup', stopResizing);
+      document.addEventListener('mousemove', handleResize);
+      
+      // Touch events for resize
+      document.addEventListener('touchend', stopResizing);
+      document.addEventListener('touchmove', handleTouchResize, { passive: false });
+    }
+
+    // =====================
+    // Navigation & History
+    // =====================
+    function navigateTo(path) {
+      const previousPath = currentPath;
+      currentPath = path;
+      
+      // Add to navigation history
+      if (navigationHistory[navigationHistory.length - 1] !== path) {
+        navigationHistory.push(path);
+      }
+      
+      // Push state to browser history
+      history.pushState({ path: path }, '', '');
+      
+      renderBreadcrumb();
+      renderFileList();
+      updateBackButton();
+    }
+
+    function goBack() {
+      if (currentPath !== 'root') {
+        // Find parent folder
+        const currentFolder = data.folders[currentPath];
+        if (currentFolder && currentFolder.parent) {
+          navigateTo(currentFolder.parent);
+        } else {
+          navigateTo('root');
+        }
+      }
+    }
+
+    function updateBackButton() {
+      const backBtn = document.getElementById('backBtn');
+      if (currentPath !== 'root') {
+        backBtn.classList.remove('hidden');
+      } else {
+        backBtn.classList.add('hidden');
+      }
+    }
+
+    // =====================
+    // Sort & View
+    // =====================
+    function setSort(value) {
+      sortOrder = value;
+      document.getElementById('sortDropdown').classList.add('hidden');
+      renderFileList();
+    }
+
+    function setViewMode(mode) {
+      viewMode = mode;
+      localStorage.setItem('viewMode', mode);
+      updateViewModeButtons();
+      renderFileList();
+    }
+
+    function updateViewModeButtons() {
+      const viewIconBtn = document.getElementById('viewIconBtn');
+      const viewDetailBtn = document.getElementById('viewDetailBtn');
+      
+      if (viewMode === 'icon') {
+        viewIconBtn.classList.add('bg-white', 'dark:bg-gray-600');
+        viewDetailBtn.classList.remove('bg-white', 'dark:bg-gray-600');
+      } else {
+        viewIconBtn.classList.remove('bg-white', 'dark:bg-gray-600');
+        viewDetailBtn.classList.add('bg-white', 'dark:bg-gray-600');
+      }
+    }
+
+    // =====================
+    // Data Management
+    // =====================
+    function loadData() {
+      const saved = localStorage.getItem('noteManagerData');
+      if (saved) {
+        data = JSON.parse(saved);
+      } else {
+        data = {
+          folders: { root: { name: 'Root', parent: null, createdAt: Date.now() } },
+          files: {}
+        };
+        saveData();
+      }
+    }
+
+    function saveData() {
+      localStorage.setItem('noteManagerData', JSON.stringify(data));
+    }
+
+    // =====================
+    // Toast
+    // =====================
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      const bgColor = type === 'success' ? 'bg-primary-600' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+      const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+      
+      toast.className = `${bgColor} text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 toast-enter min-w-[200px] pointer-events-auto`;
+      toast.innerHTML = `<span class="font-bold">${icon}</span><span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('toast-enter');
+        toast.classList.add('toast-exit');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // =====================
+    // Navigation UI
+    // =====================
+    function renderBreadcrumb() {
+      const breadcrumb = document.getElementById('breadcrumb');
+      const pathParts = getPathParts(currentPath);
+      
+      breadcrumb.innerHTML = pathParts.map((part, index) => {
+        const isLast = index === pathParts.length - 1;
+        return `
+          <button onclick="navigateTo('${part.id}')" class="${isLast ? 'text-gray-600 dark:text-gray-400' : 'text-primary-600 dark:text-primary-400 hover:underline'} font-medium whitespace-nowrap">${part.name}</button>
+          ${!isLast ? '<span class="text-gray-400">/</span>' : ''}
+        `;
+      }).join('');
+    }
+
+    function getPathParts(path) {
+      const parts = [];
+      let current = path;
+      while (current) {
+        const folder = data.folders[current];
+        if (folder) {
+          parts.unshift({ id: current, name: folder.name });
+          current = folder.parent;
+        } else {
+          break;
+        }
+      }
+      return parts;
+    }
+
+    // =====================
+    // Render File List
+    // =====================
+    function renderFileList() {
+      const fileList = document.getElementById('fileList');
+      const emptyState = document.getElementById('emptyState');
+      
+      const items = [];
+      
+      Object.entries(data.folders).forEach(([id, folder]) => {
+        if (folder.parent === currentPath) {
+          items.push({ id, type: 'folder', ...folder });
+        }
+      });
+      
+      Object.entries(data.files).forEach(([id, file]) => {
+        if (file.parent === currentPath) {
+          items.push({ id, type: file.type, ...file });
+        }
+      });
+
+      items.sort((a, b) => {
+        const aIsFolder = a.type === 'folder';
+        const bIsFolder = b.type === 'folder';
+        if (aIsFolder !== bIsFolder) return aIsFolder ? -1 : 1;
+        
+        switch (sortOrder) {
+          case 'name-asc': return a.name.localeCompare(b.name);
+          case 'name-desc': return b.name.localeCompare(a.name);
+          case 'date-asc': return (a.createdAt || 0) - (b.createdAt || 0);
+          case 'date-desc': return (b.createdAt || 0) - (a.createdAt || 0);
+          default: return 0;
+        }
+      });
+
+      if (items.length === 0) {
+        fileList.innerHTML = '';
+        fileList.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3';
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+      } else {
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+        
+        if (viewMode === 'detail') {
+          fileList.className = 'grid detail-item gap-3';
+          fileList.innerHTML = items.map(item => renderDetailItem(item)).join('');
+        } else {
+          fileList.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3';
+          fileList.innerHTML = items.map(item => renderIconItem(item)).join('');
+        }
+      }
+    }
+
+    function renderIconItem(item) {
+      const isFolder = item.type === 'folder';
+      const isNote = item.type === 'note';
+      const isTable = item.type === 'table';
+      
+      let icon, bgColor;
+      if (isFolder) {
+        icon = `<svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>`;
+        bgColor = 'bg-yellow-50 dark:bg-yellow-900/20';
+      } else if (isNote) {
+        icon = `<svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`;
+        bgColor = 'bg-blue-50 dark:bg-blue-900/20';
+      } else {
+        icon = `<svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`;
+        bgColor = 'bg-primary-50 dark:bg-primary-900/20';
+      }
+
+      const dateStr = item.createdAt ? new Date(item.createdAt).toLocaleDateString('id-ID') : '';
+
+      return `
+        <div class="group relative ${bgColor} rounded-xl p-3 cursor-pointer hover:shadow-md transition-all border border-transparent hover:border-gray-200 dark:hover:border-gray-600" onclick="${isFolder ? `navigateTo('${item.id}')` : isNote ? `openNote('${item.id}')` : `openTable('${item.id}')`}">
+          <div class="flex flex-col items-center text-center">
+            ${icon}
+            <span class="mt-2 text-sm font-medium text-gray-700 dark:text-gray-200 line-clamp-2">${item.name}</span>
+            <span class="text-xs text-gray-400 dark:text-gray-500 mt-1">${dateStr}</span>
+          </div>
+          <button onclick="event.stopPropagation(); showDeleteConfirm('${item.id}', '${item.type}')" class="absolute top-1 right-1 p-1.5 rounded-full bg-white dark:bg-gray-700 shadow opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 dark:hover:bg-red-900/30">
+            <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
+          </button>
+        </div>
+      `;
+    }
+
+    function renderDetailItem(item) {
+      const isFolder = item.type === 'folder';
+      const isNote = item.type === 'note';
+      
+      let icon, bgColor, typeLabel;
+      if (isFolder) {
+        icon = `<svg class="w-12 h-12 text-yellow-500" fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>`;
+        bgColor = 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800';
+        typeLabel = 'Folder';
+      } else if (isNote) {
+        icon = `<svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`;
+        bgColor = 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800';
+        typeLabel = 'Catatan';
+      } else {
+        icon = `<svg class="w-12 h-12 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`;
+        bgColor = 'bg-primary-50 dark:bg-primary-900/20 border-primary-200 dark:border-primary-800';
+        typeLabel = 'Tabel';
+      }
+
+      const dateStr = item.createdAt ? new Date(item.createdAt).toLocaleDateString('id-ID') : '';
+
+      return `
+        <div class="group relative ${bgColor} border rounded-xl p-4 cursor-pointer hover:shadow-md transition-all" onclick="${isFolder ? `navigateTo('${item.id}')` : isNote ? `openNote('${item.id}')` : `openTable('${item.id}')`}">
+          <div class="flex items-start gap-4">
+            <div class="shrink-0">${icon}</div>
+            <div class="flex-1 min-w-0">
+              <p class="font-semibold text-gray-800 dark:text-white line-clamp-2">${item.name}</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">${typeLabel}</p>
+              <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">${dateStr}</p>
+            </div>
+            <button onclick="event.stopPropagation(); showDeleteConfirm('${item.id}', '${item.type}')" class="shrink-0 p-2 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // =====================
+    // Modal Functions
+    // =====================
+    function showAddModal() {
+      document.getElementById('addModal').classList.remove('hidden');
+      document.getElementById('addModal').classList.add('flex');
+    }
+
+    function hideAddModal() {
+      document.getElementById('addModal').classList.add('hidden');
+      document.getElementById('addModal').classList.remove('flex');
+    }
+
+    function showCreateFolder() {
+      hideAddModal();
+      document.getElementById('folderNameInput').value = '';
+      document.getElementById('createFolderModal').classList.remove('hidden');
+      document.getElementById('createFolderModal').classList.add('flex');
+      document.getElementById('folderNameInput').focus();
+    }
+
+    function hideCreateFolder() {
+      document.getElementById('createFolderModal').classList.add('hidden');
+      document.getElementById('createFolderModal').classList.remove('flex');
+    }
+
+    function showCreateNote() {
+      hideAddModal();
+      document.getElementById('noteNameInput').value = '';
+      document.getElementById('createNoteModal').classList.remove('hidden');
+      document.getElementById('createNoteModal').classList.add('flex');
+      document.getElementById('noteNameInput').focus();
+    }
+
+    function hideCreateNote() {
+      document.getElementById('createNoteModal').classList.add('hidden');
+      document.getElementById('createNoteModal').classList.remove('flex');
+    }
+
+    function showCreateTable() {
+      hideAddModal();
+      document.getElementById('tableNameInput').value = '';
+      tempHeaders = [
+        { name: 'No', type: 'number' },
+        { name: 'Tanggal', type: 'date' },
+        { name: 'Keterangan', type: 'text' },
+        { name: 'Jumlah', type: 'number' }
+      ];
+      renderHeaderColumns();
+      document.getElementById('createTableModal').classList.remove('hidden');
+      document.getElementById('createTableModal').classList.add('flex');
+      document.getElementById('tableNameInput').focus();
+    }
+
+    function hideCreateTable() {
+      document.getElementById('createTableModal').classList.add('hidden');
+      document.getElementById('createTableModal').classList.remove('flex');
+    }
+
+    function addHeaderColumn() {
+      tempHeaders.push({ name: '', type: 'text' });
+      renderHeaderColumns();
+    }
+
+    function renderHeaderColumns() {
+      const container = document.getElementById('headerColumns');
+      container.innerHTML = tempHeaders.map((h, i) => `
+        <div class="flex gap-2 items-center">
+          <input type="text" value="${h.name}" onchange="tempHeaders[${i}].name = this.value" placeholder="Nama kolom" class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+          <select onchange="tempHeaders[${i}].type = this.value" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+            <option value="text" ${h.type === 'text' ? 'selected' : ''}>Teks</option>
+            <option value="number" ${h.type === 'number' ? 'selected' : ''}>Angka</option>
+            <option value="date" ${h.type === 'date' ? 'selected' : ''}>Tanggal</option>
+            <option value="checkbox" ${h.type === 'checkbox' ? 'selected' : ''}>Checkbox</option>
+          </select>
+          <button onclick="tempHeaders.splice(${i}, 1); renderHeaderColumns()" class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // =====================
+    // Create Functions
+    // =====================
+    function createFolder() {
+      const name = document.getElementById('folderNameInput').value.trim();
+      if (!name) {
+        showToast('Nama folder tidak boleh kosong', 'error');
+        return;
+      }
+      
+      const id = 'folder_' + Date.now();
+      data.folders[id] = { name, parent: currentPath, createdAt: Date.now() };
+      saveData();
+      hideCreateFolder();
+      renderFileList();
+      showToast('Folder berhasil dibuat');
+    }
+
+    function createNote() {
+      const name = document.getElementById('noteNameInput').value.trim();
+      if (!name) {
+        showToast('Nama catatan tidak boleh kosong', 'error');
+        return;
+      }
+      
+      const id = 'note_' + Date.now();
+      data.files[id] = { name, type: 'note', content: '', parent: currentPath, createdAt: Date.now() };
+      saveData();
+      hideCreateNote();
+      renderFileList();
+      showToast('Catatan berhasil dibuat');
+    }
+
+    function createTable() {
+      const name = document.getElementById('tableNameInput').value.trim();
+      if (!name) {
+        showToast('Nama tabel tidak boleh kosong', 'error');
+        return;
+      }
+      
+      const validHeaders = tempHeaders.filter(h => h.name.trim());
+      if (validHeaders.length === 0) {
+        showToast('Minimal satu kolom harus diisi', 'error');
+        return;
+      }
+      
+      const id = 'table_' + Date.now();
+      data.files[id] = { 
+        name, 
+        type: 'table', 
+        headers: validHeaders,
+        rows: [],
+        columnWidths: {},
+        zoom: 100,
+        parent: currentPath, 
+        createdAt: Date.now() 
+      };
+      saveData();
+      hideCreateTable();
+      renderFileList();
+      showToast('Tabel berhasil dibuat');
+    }
+
+    // =====================
+    // Note Editor
+    // =====================
+    function openNote(id) {
+      currentEditingId = id;
+      currentEditingType = 'note';
+      const note = data.files[id];
+      document.getElementById('noteEditorTitle').value = note.name;
+      document.getElementById('noteEditorContent').value = note.content || '';
+      document.getElementById('noteEditorModal').classList.remove('hidden');
+      document.getElementById('noteEditorModal').classList.add('flex');
+    }
+
+    function closeNoteEditor() {
+      document.getElementById('noteEditorModal').classList.add('hidden');
+      document.getElementById('noteEditorModal').classList.remove('flex');
+      currentEditingId = null;
+    }
+
+    function saveNote() {
+      if (!currentEditingId) return;
+      data.files[currentEditingId].name = document.getElementById('noteEditorTitle').value.trim() || 'Untitled';
+      data.files[currentEditingId].content = document.getElementById('noteEditorContent').value;
+      saveData();
+      renderFileList();
+      showToast('Catatan berhasil disimpan');
+      closeNoteEditor();
+    }
+
+    function downloadNote() {
+      if (!currentEditingId) return;
+      const note = data.files[currentEditingId];
+      const content = note.content || '';
+      const filename = `${note.name || 'Untitled'}.txt`;
+      
+      try {
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 100);
+        showToast('File berhasil diunduh');
+      } catch (e) {
+        showToast('Gagal mengunduh file', 'error');
+      }
+    }
+
+    // =====================
+    // Table Editor
+    // =====================
+    let currentTable = null;
+
+    function openTable(id) {
+      currentEditingId = id;
+      currentEditingType = 'table';
+      currentTable = JSON.parse(JSON.stringify(data.files[id]));
+      tableZoom = currentTable.zoom || 100;
+      document.getElementById('tableEditorTitle').value = currentTable.name;
+      document.getElementById('zoomLevel').textContent = tableZoom + '%';
+      renderTable();
+      document.getElementById('tableEditorModal').classList.remove('hidden');
+      document.getElementById('tableEditorModal').classList.add('flex');
+    }
+
+    function closeTableEditor() {
+      document.getElementById('tableEditorModal').classList.add('hidden');
+      document.getElementById('tableEditorModal').classList.remove('flex');
+      currentEditingId = null;
+      currentTable = null;
+    }
+
+    function calculateAutoWidth(headerName, columnIndex) {
+      let maxWidth = headerName.length * 10 + 32;
+      if (currentTable && currentTable.rows) {
+        currentTable.rows.forEach(row => {
+          const val = row[columnIndex];
+          if (val !== undefined && val !== null && val !== '') {
+            const displayVal = currentTable.headers[columnIndex].type === 'number' 
+              ? formatNumber(val) 
+              : String(val);
+            maxWidth = Math.max(maxWidth, displayVal.length * 9 + 32);
+          }
+        });
+      }
+
+      if (headerName.toLowerCase() === 'no') {
+        return Math.max(50, Math.min(maxWidth, 70));
+      }
+
+      return Math.max(100, Math.min(maxWidth, 350));
+    }
+
+    function renderTable() {
+      if (!currentTable) return;
+      
+      const container = document.getElementById('tableContainer');
+      
+      if (!currentTable.columnWidths || Object.keys(currentTable.columnWidths).length === 0) {
+        currentTable.columnWidths = {};
+        currentTable.headers.forEach((h, i) => {
+          currentTable.columnWidths[i] = calculateAutoWidth(h.name, i);
+        });
+      }
+      
+      let html = `<table class="border-collapse bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow" style="transform: scale(${tableZoom / 100}); transform-origin: top left;">`;
+      
+      html += `<thead class="bg-primary-600 text-white"><tr>`;
+      currentTable.headers.forEach((h, i) => {
+        const width = currentTable.columnWidths[i] || 150;
+        html += `
+          <th class="border border-primary-700 dark:border-primary-800 p-2 text-center font-semibold excel-cell relative group" style="width: ${width}px; min-width: ${width}px;">
+            <div class="flex items-center justify-center gap-1">
+              <span class="truncate">${h.name}</span>
+              <button onclick="deleteColumn(${i})" class="shrink-0 p-1 hover:bg-primary-700 rounded" title="Hapus kolom">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+            <div class="resize-handle" 
+                 onmousedown="startResizing(event, ${i})" 
+                 ontouchstart="startTouchResizing(event, ${i})"></div>
+          </th>
+        `;
+      });
+      html += `<th class="border border-primary-700 dark:border-primary-800 p-2 w-12"></th></tr></thead>`;
+      
+      html += `<tbody>`;
+      if (currentTable.rows) {
+        currentTable.rows.forEach((row, rowIndex) => {
+          html += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50">`;
+          currentTable.headers.forEach((h, colIndex) => {
+            const width = currentTable.columnWidths[colIndex] || 150;
+            const value = row[colIndex] !== undefined ? row[colIndex] : '';
+            html += `<td class="border border-gray-200 dark:border-gray-600 p-1 excel-cell text-center" style="width: ${width}px; min-width: ${width}px;">`;
+            
+            if (h.type === 'checkbox') {
+              html += `<div class="flex justify-center"><input type="checkbox" ${value ? 'checked' : ''} onchange="updateCell(${rowIndex}, ${colIndex}, this.checked)" class="w-5 h-5 rounded"></div>`;
+            } else if (h.type === 'date') {
+              html += `<input type="date" value="${value}" onchange="updateCell(${rowIndex}, ${colIndex}, this.value)" class="w-full px-2 py-1 bg-transparent text-gray-800 dark:text-white border-0 focus:ring-2 focus:ring-primary-500 rounded text-center">`;
+            } else if (h.type === 'number') {
+              const displayValue = value !== '' ? formatNumber(value) : '';
+              html += `<input type="text" 
+                             value="${displayValue}" 
+                             data-raw="${value}"
+                             onfocus="this.dataset.raw='${value}'; this.value='${value}'" 
+                             onblur="formatNumberInput(this, ${rowIndex}, ${colIndex})" 
+                             onchange="updateCellFromInput(this, ${rowIndex}, ${colIndex})"
+                             class="number-input w-full px-2 py-1 bg-transparent text-gray-800 dark:text-white border-0 focus:ring-2 focus:ring-primary-500 rounded">`;
+            } else {
+              html += `<input type="text" value="${value}" onchange="updateCell(${rowIndex}, ${colIndex}, this.value)" class="w-full px-2 py-1 bg-transparent text-gray-800 dark:text-white border-0 focus:ring-2 focus:ring-primary-500 rounded text-center">`;
+            }
+            
+            html += `</td>`;
+          });
+          html += `
+            <td class="border border-gray-200 dark:border-gray-600 p-1 w-12 text-center">
+              <button onclick="deleteRow(${rowIndex})" class="p-1.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+              </button>
+            </td>
+          </tr>`;
+        });
+      }
+      html += `</tbody></table>`;
+      
+      container.innerHTML = html;
+      updateTotalSum();
+    }
+
+    function formatNumberInput(input, rowIndex, colIndex) {
+      const rawValue = input.value.replace(/\./g, '').replace(/,/g, '.');
+      const num = parseFloat(rawValue);
+      
+      if (!isNaN(num)) {
+        input.value = formatNumber(num);
+        input.dataset.raw = num;
+        updateCell(rowIndex, colIndex, num);
+      } else {
+        input.value = '';
+        input.dataset.raw = '';
+        updateCell(rowIndex, colIndex, '');
+      }
+    }
+
+    function updateCellFromInput(input, rowIndex, colIndex) {
+      const rawValue = input.value.replace(/\./g, '').replace(/,/g, '.');
+      const num = parseFloat(rawValue);
+      updateCell(rowIndex, colIndex, isNaN(num) ? '' : num);
+    }
+
+    // =====================
+    // Column Resizing
+    // =====================
+    function startResizing(e, columnIndex) {
+      e.preventDefault();
+      e.stopPropagation();
+      isResizing = true;
+      resizingColumn = columnIndex;
+      resizeStartX = e.clientX;
+      resizeStartWidth = currentTable.columnWidths[columnIndex] || 150;
+      document.body.style.cursor = 'col-resize';
+      document.body.style.userSelect = 'none';
+    }
+
+    function startTouchResizing(e, columnIndex) {
+      e.preventDefault();
+      e.stopPropagation();
+      isResizing = true;
+      resizingColumn = columnIndex;
+      const touch = e.touches[0];
+      resizeStartX = touch.clientX;
+      resizeStartWidth = currentTable.columnWidths[columnIndex] || 150;
+      document.body.style.userSelect = 'none';
+    }
+
+    function handleResize(e) {
+      if (!isResizing || resizingColumn === null || !currentTable) return;
+      
+      const delta = e.clientX - resizeStartX;
+      const newWidth = Math.max(50, resizeStartWidth + delta);
+      currentTable.columnWidths[resizingColumn] = newWidth;
+      
+      updateColumnWidth(resizingColumn, newWidth);
+    }
+
+    function handleTouchResize(e) {
+      if (!isResizing || resizingColumn === null || !currentTable) return;
+      
+      e.preventDefault();
+      const touch = e.touches[0];
+      const delta = touch.clientX - resizeStartX;
+      const newWidth = Math.max(50, resizeStartWidth + delta);
+      currentTable.columnWidths[resizingColumn] = newWidth;
+      
+      updateColumnWidth(resizingColumn, newWidth);
+    }
+
+    function updateColumnWidth(columnIndex, newWidth) {
+      const table = document.querySelector('#tableContainer table');
+      if (table) {
+        const headers = table.querySelectorAll('thead th');
+        if (headers[columnIndex]) {
+          headers[columnIndex].style.width = newWidth + 'px';
+          headers[columnIndex].style.minWidth = newWidth + 'px';
+          
+          const rows = table.querySelectorAll('tbody tr');
+          rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells[columnIndex]) {
+              cells[columnIndex].style.width = newWidth + 'px';
+              cells[columnIndex].style.minWidth = newWidth + 'px';
+            }
+          });
+        }
+      }
+    }
+
+    function stopResizing() {
+      if (isResizing) {
+        isResizing = false;
+        document.body.style.cursor = 'auto';
+        document.body.style.userSelect = 'auto';
+        resizingColumn = null;
+      }
+    }
+
+    // =====================
+    // Zoom & Table Operations
+    // =====================
+    function zoomTable(direction) {
+      tableZoom += direction * 10;
+      tableZoom = Math.max(50, Math.min(200, tableZoom));
+      document.getElementById('zoomLevel').textContent = tableZoom + '%';
+      renderTable();
+    }
+
+    function updateCell(rowIndex, colIndex, value) {
+      if (!currentTable.rows) currentTable.rows = [];
+      if (!currentTable.rows[rowIndex]) {
+        currentTable.rows[rowIndex] = [];
+      }
+      currentTable.rows[rowIndex][colIndex] = value;
+      updateTotalSum();
+    }
+
+    function addTableRow() {
+      if (!currentTable.rows) currentTable.rows = [];
+      const newRow = currentTable.headers.map(h => {
+        if (h.type === 'checkbox') return false;
+        if (h.type === 'date') return new Date().toISOString().split('T')[0];
+        if (h.type === 'number') {
+          if (h.name.toLowerCase() === 'no') return currentTable.rows.length + 1;
+          return '';
+        }
+        return '';
+      });
+      currentTable.rows.push(newRow);
+      renderTable();
+    }
+
+    function deleteRow(index) {
+      showDeleteConfirmSimple(`Hapus baris ${index + 1}?`, () => {
+        currentTable.rows.splice(index, 1);
+        currentTable.rows.forEach((row, i) => {
+          const noIndex = currentTable.headers.findIndex(h => h.name.toLowerCase() === 'no');
+          if (noIndex !== -1) {
+            row[noIndex] = i + 1;
+          }
+        });
+        renderTable();
+        showToast('Baris berhasil dihapus');
+      });
+    }
+
+    function deleteColumn(index) {
+      showDeleteConfirmSimple(`Hapus kolom "${currentTable.headers[index].name}"?`, () => {
+        currentTable.headers.splice(index, 1);
+        const newWidths = {};
+        Object.entries(currentTable.columnWidths).forEach(([key, val]) => {
+          const keyNum = parseInt(key);
+          if (keyNum < index) newWidths[keyNum] = val;
+          else if (keyNum > index) newWidths[keyNum - 1] = val;
+        });
+        currentTable.columnWidths = newWidths;
+        currentTable.rows.forEach(row => row.splice(index, 1));
+        renderTable();
+        showToast('Kolom berhasil dihapus');
+      });
+    }
+
+    let simpleDeleteCallback = null;
+    function showDeleteConfirmSimple(message, callback) {
+      simpleDeleteCallback = callback;
+      document.getElementById('deleteMessage').textContent = message;
+      document.getElementById('deleteConfirmInput').classList.add('hidden');
+      document.getElementById('deleteConfirmText').value = '';
+      deleteTarget = { type: 'simple' };
+      document.getElementById('deleteModal').classList.remove('hidden');
+      document.getElementById('deleteModal').classList.add('flex');
+    }
+
+    function addTableColumn() {
+      document.getElementById('newColumnName').value = '';
+      document.getElementById('newColumnType').value = 'text';
+      document.getElementById('addColumnModal').classList.remove('hidden');
+      document.getElementById('addColumnModal').classList.add('flex');
+      document.getElementById('newColumnName').focus();
+    }
+
+    function hideAddColumnModal() {
+      document.getElementById('addColumnModal').classList.add('hidden');
+      document.getElementById('addColumnModal').classList.remove('flex');
+    }
+
+    function confirmAddColumn() {
+      const name = document.getElementById('newColumnName').value.trim();
+      const type = document.getElementById('newColumnType').value;
+      
+      if (!name) {
+        showToast('Nama kolom tidak boleh kosong', 'error');
+        return;
+      }
+      
+      const newIndex = currentTable.headers.length;
+      currentTable.headers.push({ name, type });
+      currentTable.columnWidths[newIndex] = calculateAutoWidth(name, newIndex);
+      if (!currentTable.rows) currentTable.rows = [];
+      currentTable.rows.forEach(row => {
+        if (type === 'checkbox') row.push(false);
+        else if (type === 'date') row.push(new Date().toISOString().split('T')[0]);
+        else row.push('');
+      });
+      
+      hideAddColumnModal();
+      renderTable();
+      showToast('Kolom berhasil ditambahkan');
+    }
+
+    function updateTotalSum() {
+      let total = 0;
+      if (currentTable && currentTable.headers && currentTable.rows) {
+        currentTable.headers.forEach((h, colIndex) => {
+          if (h.type === 'number' && h.name.toLowerCase() !== 'no') {
+            currentTable.rows.forEach(row => {
+              const val = parseFloat(row[colIndex]) || 0;
+              total += val;
+            });
+          }
+        });
+      }
+      document.getElementById('totalSum').textContent = formatNumber(total) || '0';
+    }
+
+    function saveTable() {
+      if (!currentEditingId || !currentTable) return;
+      currentTable.name = document.getElementById('tableEditorTitle').value.trim() || 'Untitled';
+      currentTable.zoom = tableZoom;
+      data.files[currentEditingId] = currentTable;
+      saveData();
+      renderFileList();
+      showToast('Tabel berhasil disimpan');
+      closeTableEditor();
+    }
+
+    function downloadTableTxt() {
+      if (!currentTable) return;
+      
+      let content = currentTable.name + '\n';
+      content += '='.repeat(50) + '\n\n';
+      
+      content += currentTable.headers.map(h => h.name).join('\t') + '\n';
+      content += '-'.repeat(50) + '\n';
+      
+      if (currentTable.rows) {
+        currentTable.rows.forEach(row => {
+          content += currentTable.headers.map((h, i) => {
+            const val = row[i];
+            if (h.type === 'checkbox') return val ? 'Ya' : 'Tidak';
+            if (h.type === 'number' && h.name.toLowerCase() !== 'no') return formatNumber(val) || '0';
+            return val || '';
+          }).join('\t') + '\n';
+        });
+      }
+      
+      let total = 0;
+      currentTable.headers.forEach((h, colIndex) => {
+        if (h.type === 'number' && h.name.toLowerCase() !== 'no') {
+          if (currentTable.rows) {
+            currentTable.rows.forEach(row => {
+              total += parseFloat(row[colIndex]) || 0;
+            });
+          }
+        }
+      });
+      content += '\n' + '-'.repeat(50) + '\n';
+      content += `Total: ${formatNumber(total) || '0'}\n`;
+      
+      try {
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `${currentTable.name}.txt`);
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 100);
+        showToast('File TXT berhasil diunduh');
+      } catch (e) {
+        showToast('Gagal mengunduh file TXT', 'error');
+      }
+    }
+
+    function downloadTableExcel() {
+      if (!currentTable) return;
+      
+      let csv = '\uFEFF';
+      csv += currentTable.headers.map(h => `"${h.name}"`).join(',') + '\n';
+      
+      if (currentTable.rows) {
+        currentTable.rows.forEach(row => {
+          csv += currentTable.headers.map((h, i) => {
+            const val = row[i];
+            if (h.type === 'checkbox') return val ? '"Ya"' : '"Tidak"';
+            if (h.type === 'number') return val || '0';
+            if (typeof val === 'string' && val.includes(',')) return `"${val}"`;
+            return val || '';
+          }).join(',') + '\n';
+        });
+      }
+      
+      let total = 0;
+      currentTable.headers.forEach((h, colIndex) => {
+        if (h.type === 'number' && h.name.toLowerCase() !== 'no') {
+          if (currentTable.rows) {
+            currentTable.rows.forEach(row => {
+              total += parseFloat(row[colIndex]) || 0;
+            });
+          }
+        }
+      });
+      csv += '\n"Total","",' + ','.repeat(currentTable.headers.length - 3) + `"${total}"\n`;
+      
+      try {
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `${currentTable.name}.csv`);
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 100);
+        showToast('File Excel (CSV) berhasil diunduh');
+      } catch (e) {
+        showToast('Gagal mengunduh file Excel', 'error');
+      }
+    }
+
+    // =====================
+    // Delete Confirmation
+    // =====================
+    function showDeleteConfirm(id, type) {
+      deleteTarget = { id, type };
+      const item = type === 'folder' ? data.folders[id] : data.files[id];
+      const itemType = type === 'folder' ? 'folder' : (type === 'note' ? 'catatan' : 'tabel');
+      
+      document.getElementById('deleteMessage').textContent = `Apakah Anda yakin ingin menghapus ${itemType} "${item.name}"?`;
+      
+      if (type === 'folder' || type === 'note' || type === 'table') {
+        document.getElementById('deleteConfirmInput').classList.remove('hidden');
+      } else {
+        document.getElementById('deleteConfirmInput').classList.add('hidden');
+      }
+      document.getElementById('deleteConfirmText').value = '';
+      
+      document.getElementById('deleteModal').classList.remove('hidden');
+      document.getElementById('deleteModal').classList.add('flex');
+    }
+
+    function hideDeleteModal() {
+      document.getElementById('deleteModal').classList.add('hidden');
+      document.getElementById('deleteModal').classList.remove('flex');
+      deleteTarget = null;
+      simpleDeleteCallback = null;
+    }
+
+    function confirmDelete() {
+      if (!deleteTarget) return;
+      
+      if (deleteTarget.type === 'simple') {
+        if (simpleDeleteCallback) {
+          simpleDeleteCallback();
+        }
+        hideDeleteModal();
+        return;
+      }
+      
+      const { id, type } = deleteTarget;
+      const confirmInput = document.getElementById('deleteConfirmInput');
+      
+      if (!confirmInput.classList.contains('hidden')) {
+        const confirmText = document.getElementById('deleteConfirmText').value.trim().toLowerCase();
+        if (confirmText !== 'yes') {
+          showToast('Ketik "yes" untuk mengkonfirmasi', 'error');
+          return;
+        }
+      }
+      
+      if (type === 'folder') {
+        deleteFolderRecursive(id);
+        delete data.folders[id];
+      } else {
+        delete data.files[id];
+      }
+      
+      saveData();
+      hideDeleteModal();
+      renderFileList();
+      showToast('Berhasil dihapus');
+    }
+
+    function deleteFolderRecursive(folderId) {
+      Object.keys(data.files).forEach(fileId => {
+        if (data.files[fileId].parent === folderId) {
+          delete data.files[fileId];
+        }
+      });
+      
+      Object.keys(data.folders).forEach(subFolderId => {
+        if (data.folders[subFolderId].parent === folderId) {
+          deleteFolderRecursive(subFolderId);
+          delete data.folders[subFolderId];
+        }
+      });
+    }
+
+    // Initialize app
+    init();
+  </script>
+</body>
+</html>
