@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Note Manager</title>
+  
+  <!-- PWA Meta Tags & Links -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Note Manager" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#22c55e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="description" content="Aplikasi manajemen catatan dan tabel excel">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-full bg-gray-50 dark:bg-gray-900 font-sans transition-colors duration-200">
+  
+  <!-- Splash Screen -->
+  <div id="splashScreen" class="fixed inset-0 z-[100] flex flex-col items-center justify-between py-12 bg-white dark:bg-gray-900">
+    <div></div>
+    <div class="flex flex-col items-center">
+      <div class="splash-logo">
+        <svg class="w-28 h-28 text-green-500" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="20" fill="currentColor"/>
+          <path d="M25 30h50v8H25zM25 46h50v8H25zM25 62h35v8H25z" fill="white"/>
+          <circle cx="70" cy="70" r="12" fill="white"/>
+          <path d="M70 64v12M64 70h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h1 class="mt-4 text-2xl font-bold text-gray-800 dark:text-white">Note Manager</h1>
+    </div>
+    <p class="splash-credit text-sm text-gray-500 dark:text-gray-400">By PP Daruttauhid Al Alawi</p>
+  </div>
+
+  <!-- Main App -->
+  <div id="app" class="h-full flex flex-col overflow-hidden">
+    <!-- Header -->
+    <header id="mainHeader" class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-3 sm:px-4 py-2 flex items-center shrink-0 transition-all duration-300">
+      
+      <!-- Logo - Always Visible -->
+      <svg class="w-7 h-7 sm:w-8 sm:h-8 text-green-500 shrink-0 mr-2" viewBox="0 0 100 100" fill="none">
+        <rect width="100" height="100" rx="20" fill="currentColor"/>
+        <path d="M25 30h50v8H25zM25 46h50v8H25zM25 62h35v8H25z" fill="white"/>
+        <circle cx="70" cy="70" r="12" fill="white"/>
+        <path d="M70 64v12M64 70h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      
+      <!-- Title & Credit - Collapsible on Mobile Search -->
+      <div id="titleGroup" class="flex-1 min-w-0 flex flex-col justify-center transition-all duration-300 ease-in-out overflow-hidden">
+        <h1 class="text-sm sm:text-base font-bold text-gray-800 dark:text-white leading-tight truncate">Note Manager</h1>
+        <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 dark:text-gray-400 leading-tight truncate">By PP Daruttauhid Al Alawi</p>
+      </div>
+      
+      <!-- Search Group -->
+      <div class="flex items-center gap-1 ml-2">
+        
+        <!-- Mobile Search Container (Expandable) -->
+        <div id="mobileSearchContainer" class="sm:hidden flex items-center overflow-hidden transition-all duration-300 ease-in-out w-0 opacity-0">
+          <input type="text" id="searchInputMobile" placeholder="Cari file..." class="w-32 min-w-0 px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent">
+        </div>
+        
+        <!-- Mobile Search Toggle Button -->
+        <button id="mobileSearchToggle" onclick="toggleMobileSearch()" class="sm:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors shrink-0">
+          <svg id="searchIconOpen" class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <svg id="searchIconClose" class="w-5 h-5 text-gray-600 dark:text-gray-300 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        
+        <!-- Desktop Search Input -->
+        <div class="hidden sm:block relative">
+          <input type="text" id="searchInputDesktop" placeholder="Cari file..." class="w-40 md:w-48 lg:w-56 pl-9 pr-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
+          <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+
+        <!-- Settings Button -->
+        <button id="settingsBtn" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors shrink-0" title="Pengaturan">
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </button>
+        
+        <!-- Settings Dropdown -->
+        <div id="settingsDropdown" class="hidden absolute right-3 sm:right-4 top-14 mt-1 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 z-50 overflow-hidden">
+          <div class="max-h-[70vh] overflow-y-auto">
+            <!-- Trash -->
+            <button onclick="showTrashModal()" class="w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm flex items-center gap-3 border-b border-gray-100 dark:border-gray-700">
+              <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+              </svg>
+              Tempat Sampah
+            </button>
+            
+            <!-- Backup/Restore -->
+            <div class="border-b border-gray-100 dark:border-gray-700">
+              <button onclick="backupData()" class="w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm flex items-center gap-3">
+                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Backup Data
+              </button>
+              <button onclick="document.getElementById('restoreInput').click()" class="w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm flex items-center gap-3">
+                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                </svg>
+                Restore Data
+              </button>
+              <input type="file" id="restoreInput" accept=".json" class="hidden" onchange="restoreData(event)">
+            </div>
+            
+            <!-- Sort -->
+            <div class="border-b border-gray-100 dark:border-gray-700">
+              <div class="px-4 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase">Urutkan</div>
+              <button onclick="setSort('name-asc')" class="sort-item w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm">Nama A-Z</button>
+              <button onclick="setSort('name-desc')" class="sort-item w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm">Nama Z-A</button>
+              <button onclick="setSort('date-asc')" class="sort-item w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm">Terlama</button>
+              <button onclick="setSort('date-desc')" class="sort-item w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm">Terbaru</button>
+            </div>
+            
+            <!-- View Mode -->
+            <div class="border-b border-gray-100 dark:border-gray-700">
+              <div class="px-4 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase">Tampilan</div>
+              <button onclick="setViewMode('icon')" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm flex items-center gap-3">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>
+                Grid Ikon
+              </button>
+              <button onclick="setViewMode('detail')" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm flex items-center gap-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                Daftar Detail
+              </button>
+            </div>
+            
+            <!-- Dark Mode -->
+            <button onclick="toggleDarkMode()" class="w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm flex items-center gap-3">
+              <svg id="darkModeIcon" class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+              </svg>
+              <span id="darkModeText">Mode Gelap</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div id="breadcrumb" class="bg-white dark:bg-gray-800 px-4 py-2 border-b border-gray-200 dark:border-gray-700 flex items-center gap-2 text-sm shrink-0 overflow-x-auto whitespace-nowrap">
+    </div>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="flex-1 overflow-auto p-3 sm:p-4">
+      <div id="fileList" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"></div>
+      <div id="emptyState" class="hidden flex-col items-center justify-center h-64 text-gray-400 dark:text-gray-500">
+        <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+        </svg>
+        <p class="text-lg">Folder kosong</p>
+        <p class="text-sm">Klik + untuk menambah item baru</p>
+      </div>
+      <div id="searchResults" class="hidden flex-col h-full">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Hasil Pencarian</h2>
+        <div id="searchList" class="flex-1 overflow-auto"></div>
+      </div>
+    </main>
+
+    <!-- FAB Button -->
+    <button id="fabButton" onclick="showAddModal()" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 w-12 h-12 sm:w-14 sm:h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 z-40 active:scale-95">
+      <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+    </button>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Add Modal -->
+    <div id="addModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target===this)hideAddModal()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Tambah Baru</h3>
+        </div>
+        <div class="p-2">
+          <button onclick="showCreateFolder()" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+              </svg>
+            </div>
+            <span class="text-gray-700 dark:text-gray-200 font-medium">Folder Baru</span>
+          </button>
+          <button onclick="showCreateNote()" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <span class="text-gray-700 dark:text-gray-200 font-medium">Catatan Teks</span>
+          </button>
+          <button onclick="showCreateTable()" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <span class="text-gray-700 dark:text-gray-200 font-medium">Tabel Excel</span>
+          </button>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+          <button onclick="hideAddModal()" class="w-full py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Folder Modal -->
+    <div id="createFolderModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target===this)hideCreateFolder()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Buat Folder Baru</h3>
+        </div>
+        <div class="p-4">
+          <input type="text" id="folderNameInput" placeholder="Nama folder" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent">
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideCreateFolder()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="createFolder()" class="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl font-medium transition-colors">Buat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Note Modal -->
+    <div id="createNoteModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target===this)hideCreateNote()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Buat Catatan Baru</h3>
+        </div>
+        <div class="p-4">
+          <input type="text" id="noteNameInput" placeholder="Nama catatan" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent">
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideCreateNote()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="createNote()" class="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl font-medium transition-colors">Buat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Table Modal -->
+    <div id="createTableModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto" onclick="if(event.target===this)hideCreateTable()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-lg modal-enter my-4">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Buat Tabel Baru</h3>
+        </div>
+        <div class="p-4 space-y-4">
+          <input type="text" id="tableNameInput" placeholder="Nama tabel" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent">
+          
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Kolom Header</label>
+              <button onclick="addHeaderColumn()" class="text-sm text-green-600 dark:text-green-400 hover:underline">+ Tambah Kolom</button>
+            </div>
+            <div id="headerColumns" class="space-y-2 max-h-60 overflow-y-auto"></div>
+          </div>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideCreateTable()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="createTable()" class="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl font-medium transition-colors">Buat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Note Editor Modal -->
+    <div id="noteEditorModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target===this)closeNoteEditor()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-2xl h-[80%] flex flex-col modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between shrink-0">
+          <input type="text" id="noteEditorTitle" class="text-lg font-semibold text-gray-800 dark:text-white bg-transparent border-0 focus:ring-0 w-full" placeholder="Judul catatan">
+          <div class="flex gap-2 shrink-0 ml-2">
+            <button onclick="downloadNote()" class="p-2 text-gray-500 hover:text-green-600 dark:text-gray-400 dark:hover:text-green-400" title="Download TXT">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+            </button>
+            <button onclick="closeNoteEditor()" class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex-1 p-4 overflow-hidden">
+          <textarea id="noteEditorContent" class="w-full h-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none" placeholder="Tulis catatan Anda di sini..."></textarea>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-2 shrink-0">
+          <button onclick="closeNoteEditor()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Tutup</button>
+          <button onclick="saveNote()" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl font-medium transition-colors">Simpan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Editor Modal -->
+    <div id="tableEditorModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-2 md:p-4" onclick="if(event.target===this)closeTableEditor()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-6xl h-[95%] flex flex-col modal-enter">
+        <div class="p-3 md:p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between shrink-0 flex-wrap gap-2">
+          <input type="text" id="tableEditorTitle" class="text-base md:text-lg font-semibold text-gray-800 dark:text-white bg-transparent border-0 focus:ring-0 flex-1 min-w-[120px]" placeholder="Judul tabel">
+          <div class="flex gap-1 md:gap-2 shrink-0 flex-wrap">
+            <button onclick="zoomTable(-1)" class="p-2 text-gray-500 hover:text-green-600 dark:text-gray-400 dark:hover:text-green-400" title="Zoom Out">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+            </button>
+            <span id="zoomLevel" class="text-xs text-gray-500 dark:text-gray-400 px-2 py-2">100%</span>
+            <button onclick="zoomTable(1)" class="p-2 text-gray-500 hover:text-green-600 dark:text-gray-400 dark:hover:text-green-400" title="Zoom In">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            </button>
+            <button onclick="addTableColumn()" class="p-2 text-gray-500 hover:text-green-600 dark:text-gray-400 dark:hover:text-green-400" title="Tambah Kolom">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+            </button>
+            <button onclick="downloadTableTxt()" class="p-2 text-gray-500 hover:text-green-600 dark:text-gray-400 dark:hover:text-green-400" title="Download TXT">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </button>
+            <button onclick="downloadTableExcel()" class="p-2 text-gray-500 hover:text-green-600 dark:text-gray-400 dark:hover:text-green-400" title="Download Excel">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            </button>
+            <button onclick="closeTableEditor()" class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </div>
+        
+        <div id="tableSummary" class="px-3 md:px-4 py-2 bg-green-50 dark:bg-green-900/20 border-b border-gray-200 dark:border-gray-700 text-sm shrink-0 flex flex-wrap gap-x-4 gap-y-1"></div>
+        
+        <div class="flex-1 overflow-hidden flex flex-col p-2 md:p-4">
+          <div id="tableContainer" class="table-scroll overflow-x-auto flex-1"></div>
+        </div>
+        
+        <div class="p-3 md:p-4 border-t border-gray-200 dark:border-gray-700 shrink-0 bg-white dark:bg-gray-800">
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+            <button onclick="addTableRow()" class="w-full sm:w-auto px-4 py-2 border border-green-500 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-xl font-medium transition-colors flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              Tambah Baris
+            </button>
+            <div class="flex gap-2 w-full sm:w-auto">
+              <button onclick="closeTableEditor()" class="flex-1 sm:flex-none px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium text-center">Tutup</button>
+              <button onclick="saveTable()" class="flex-1 sm:flex-none px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl font-medium transition-colors text-center">Simpan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Column Modal -->
+    <div id="addColumnModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] hidden items-center justify-center p-4" onclick="if(event.target===this)hideAddColumnModal()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Tambah Kolom Baru</h3>
+        </div>
+        <div class="p-4 space-y-3">
+          <input type="text" id="newColumnName" placeholder="Nama kolom" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent">
+          <select id="newColumnType" onchange="handleColumnTypeChange('newColumnType', 'newColumnName')" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent">
+            <option value="text">Teks</option>
+            <option value="number">Angka</option>
+            <option value="date">Tanggal</option>
+            <option value="checkbox">Checkbox</option>
+            <option value="income">Pemasukan</option>
+            <option value="expense">Pengeluaran</option>
+            <option value="balance">Saldo (Auto)</option>
+          </select>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideAddColumnModal()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="confirmAddColumn()" class="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl font-medium transition-colors">Tambah</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Menu Modal -->
+    <div id="actionMenuModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4" onclick="if(event.target===this)hideActionMenu()">
+      <div class="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl shadow-xl w-full sm:max-w-sm modal-enter max-h-[70vh] overflow-y-auto">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800">
+          <div class="flex items-center gap-3">
+            <div id="actionMenuIcon" class="w-10 h-10 rounded-lg flex items-center justify-center"></div>
+            <div class="flex-1 min-w-0">
+              <p id="actionMenuTitle" class="font-semibold text-gray-800 dark:text-white truncate"></p>
+              <p id="actionMenuSubtitle" class="text-xs text-gray-500 dark:text-gray-400"></p>
+            </div>
+          </div>
+        </div>
+        <div class="p-2" id="actionMenuItems"></div>
+        <div class="p-2 border-t border-gray-200 dark:border-gray-700 sticky bottom-0 bg-white dark:bg-gray-800">
+          <button onclick="hideActionMenu()" class="w-full py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rename Modal -->
+    <div id="renameModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target===this)hideRenameModal()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Ganti Nama</h3>
+        </div>
+        <div class="p-4">
+          <input type="text" id="renameInput" placeholder="Nama baru" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent">
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideRenameModal()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="confirmRename()" class="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl font-medium transition-colors">Simpan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Folder Picker Modal -->
+    <div id="folderPickerModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target===this)hideFolderPicker()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter max-h-[80vh] flex flex-col">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 shrink-0">
+          <h3 id="folderPickerTitle" class="text-lg font-semibold text-gray-800 dark:text-white">Pilih Folder</h3>
+        </div>
+        <div class="p-4 flex-1 overflow-y-auto" id="folderPickerTree"></div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2 shrink-0">
+          <button onclick="hideFolderPicker()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button onclick="confirmMoveCopy()" class="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl font-medium transition-colors">Pilih</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trash Modal -->
+    <div id="trashModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target===this)hideTrashModal()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-lg modal-enter max-h-[80vh] flex flex-col">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between shrink-0">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Tempat Sampah</h3>
+          <button onclick="emptyTrash()" class="px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg">Kosongkan</button>
+        </div>
+        <div id="trashList" class="flex-1 overflow-y-auto p-4"></div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 shrink-0">
+          <button onclick="hideTrashModal()" class="w-full py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Tutup</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target===this)hideDeleteModal()">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm modal-enter">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-red-600 dark:text-red-400">Konfirmasi Hapus</h3>
+        </div>
+        <div class="p-4 space-y-3">
+          <p id="deleteMessage" class="text-gray-700 dark:text-gray-300"></p>
+          <div id="deleteConfirmInput" class="hidden">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Ketik <strong>yes</strong> untuk konfirmasi:</p>
+            <input type="text" id="deleteConfirmText" placeholder="yes" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-red-500 focus:border-transparent">
+          </div>
+        </div>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+          <button onclick="hideDeleteModal()" class="flex-1 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium">Batal</button>
+          <button id="deleteConfirmBtn" onclick="confirmDelete()" class="flex-1 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition-colors">Hapus</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
